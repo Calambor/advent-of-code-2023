@@ -1,9 +1,11 @@
+package day1
+
 import java.io.File
 
 
 fun main(args: Array<String>) {
 
-    val input = File("input_1.txt").readLines()
+    val input = File("input1.txt").readLines()
     val validEntries = listOf(
         "one",
         "two",
