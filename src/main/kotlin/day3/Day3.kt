@@ -13,24 +13,29 @@ fun main() {
     for (y in 0 until grid.size) {
         for (x in 0 until grid[0].size) {
 
-            if (!grid[y][x].isDigit() && grid[y][x] != '.'){
+            if (grid[y][x] == '*'){
                 // Find nearby
+                val near = mutableListOf<Int>()
                 val top = grid.getNumber(x, y - 1)
                 if (top != null) {
-                    sum += top
+                    near += top
                 } else {
-                    grid.getNumber(x - 1, y - 1)?.run { sum += this }
-                    grid.getNumber(x + 1, y - 1)?.run { sum += this }
+                    grid.getNumber(x - 1, y - 1)?.run { near += this }
+                    grid.getNumber(x + 1, y - 1)?.run { near += this }
                 }
                 val bottom = grid.getNumber(x, y + 1)
                 if (bottom != null) {
-                    sum += bottom
+                    near += bottom
                 } else {
-                    grid.getNumber(x - 1, y + 1)?.run { sum += this }
-                    grid.getNumber(x + 1, y + 1)?.run { sum += this }
+                    grid.getNumber(x - 1, y + 1)?.run { near += this }
+                    grid.getNumber(x + 1, y + 1)?.run { near += this }
                 }
-                grid.getNumber(x - 1, y)?.run { sum += this }
-                grid.getNumber(x + 1, y)?.run { sum += this }
+                grid.getNumber(x - 1, y)?.run { near += this }
+                grid.getNumber(x + 1, y)?.run { near += this }
+
+                if (near.size == 2) {
+                    sum += near[0] * near[1]
+                }
             }
 
         }
